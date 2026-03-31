@@ -1,0 +1,128 @@
+{
+  "version": "1.0.0",
+  "description": "CCClaude hook rules — declarative safety guardrails for PreToolUse and PostToolUse hooks",
+  "rules": [
+    {
+      "id": "R01",
+      "name": "no-sudo",
+      "description": "Block all sudo commands to prevent privilege escalation",
+      "action": "deny",
+      "event": "PreToolUse",
+      "matcher": "Bash",
+      "pattern": "(^|[;&|]\\s*)sudo\\b"
+    },
+    {
+      "id": "R02",
+      "name": "no-protected-writes",
+      "description": "Block writes to .git/, .env, ~/.ssh/, ~/.aws/, ~/.gnupg/",
+      "action": "deny",
+      "event": "PreToolUse",
+      "matcher": "Edit,Write",
+      "pattern": "file_path matches protected_paths"
+    },
+    {
+      "id": "R03",
+      "name": "no-redirect-to-protected",
+      "description": "Block shell redirects (>, >>, tee) to protected paths",
+      "action": "deny",
+      "event": "PreToolUse",
+      "matcher": "Bash",
+      "pattern": "(>|>>|tee\\s).*protected_paths"
+    },
+    {
+      "id": "R04",
+      "name": "no-force-push",
+      "description": "Block git push --force and variants (--force-with-lease, -f)",
+      "action": "deny",
+      "event": "PreToolUse",
+      "matcher": "Bash",
+      "pattern": "git\\s+push\\b.*(--force|-f|--force-with-lease)"
+    },
+    {
+      "id": "R05",
+      "name": "no-rm-rf-root",
+      "description": "Prompt confirmation for rm -rf on project root or home directory",
+      "action": "ask",
+      "event": "PreToolUse",
+      "matcher": "Bash",
+      "pattern": "rm\\s+(-[a-zA-Z]*r[a-zA-Z]*f)\\s+(/\\s*$|~/|\\.\\s*$|\\$HOME)"
+    },
+    {
+      "id": "R06",
+      "name": "no-skip-hooks",
+      "description": "Block --no-verify and --no-gpg-sign git flags",
+      "action": "deny",
+      "event": "PreToolUse",
+      "matcher": "Bash",
+      "pattern": "git\\b.*(--no-verify|--no-gpg-sign)"
+    },
+    {
+      "id": "R07",
+      "name": "no-hard-reset-protected",
+      "description": "Block git reset --hard on main/master branches",
+      "action": "deny",
+      "event": "PreToolUse",
+      "matcher": "Bash",
+      "pattern": "git\\s+reset\\s+--hard.*(main|master)"
+    },
+    {
+      "id": "R08",
+      "name": "detect-secrets",
+      "description": "Warn on hardcoded API keys, passwords, and private keys in file content",
+      "action": "warn",
+      "event": "PostToolUse",
+      "matcher": "Edit,Write,Bash",
+      "patterns_ref": "secret_patterns"
+    },
+    {
+      "id": "R09",
+      "name": "detect-dangerous-code",
+      "description": "Warn on eval(), innerHTML, exec(), subprocess shell=True, etc.",
+      "action": "warn",
+      "event": "PostToolUse",
+      "matcher": "Edit,Write"
+    },
+    {
+      "id": "R10",
+      "name": "detect-debug-remnants",
+      "description": "Warn on console.log, print(), debugger, and TODO/FIXME without ticket references",
+      "action": "warn",
+      "event": "PostToolUse",
+      "matcher": "Edit,Write"
+    }
+  ],
+  "protected_paths": [
+    ".git/",
+    ".env",
+    "~/.ssh/",
+    "~/.aws/",
+    "~/.gnupg/"
+  ],
+  "protected_branches": [
+    "main",
+    "master"
+  ],
+  "secret_patterns": [
+    "sk-[a-zA-Z0-9]{20,}",
+    "pk-[a-zA-Z0-9]{20,}",
+    "AKIA[0-9A-Z]{16}",
+    "ghp_[a-zA-Z0-9]{36}",
+    "npm_[a-zA-Z0-9]{36}",
+    "-----BEGIN (RSA |EC )?PRIVATE KEY-----"
+  ],
+  "dangerous_patterns": [
+    "\\beval\\s*\\(",
+    "\\.innerHTML\\s*=",
+    "dangerouslySetInnerHTML",
+    "\\bexec\\s*\\(",
+    "\\b__import__\\s*\\(",
+    "subprocess.*shell\\s*=\\s*True"
+  ],
+  "debug_patterns": [
+    "\\bconsole\\.(log|debug|info|warn|error)\\s*\\(",
+    "^\\s*print\\s*\\(",
+    "\\bdebugger\\b",
+    "\\bpdb\\.set_trace\\s*\\(",
+    "\\bbreakpoint\\s*\\("
+  ]
+}

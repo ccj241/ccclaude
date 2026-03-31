@@ -1,0 +1,65 @@
+# {Project Name}
+
+## Overview
+
+{Brief project description: what it does, who it is for, and why it exists.}
+
+## Tech Stack
+
+- **Language**: {e.g., TypeScript, Go, Python}
+- **Framework**: {e.g., Next.js, Gin, FastAPI}
+- **Database**: {e.g., PostgreSQL, MySQL, MongoDB}
+- **Cache**: {e.g., Redis, Memcached}
+- **Infrastructure**: {e.g., AWS, GCP, Docker, Kubernetes}
+
+## Architecture
+
+{High-level architecture description. Include key layers, services, and data flow.}
+
+```
+{ASCII diagram of system architecture}
+```
+
+## Directory Structure
+
+```
+project/
+├── src/           # Application source code
+├── tests/         # Test files
+├── config/        # Configuration files
+├── docs/          # Documentation
+└── scripts/       # Build and deployment scripts
+```
+
+## Coding Conventions
+
+- {Convention 1: e.g., Use camelCase for variables, PascalCase for types}
+- {Convention 2: e.g., Error messages in English}
+- {Convention 3: e.g., API paths follow /api/v1/resources (plural)}
+- {Convention 4: e.g., All dates in ISO 8601 format}
+
+## Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `DATABASE_URL` | Database connection string | Yes |
+| `REDIS_URL` | Redis connection string | Yes |
+| `API_KEY` | External service API key | Yes |
+
+## CCClaude Configuration
+
+This project uses [CCClaude](https://github.com/anthropics/CCClaude) harness.
+
+- **Profiles**: {list active profiles, e.g., backend, frontend, fullstack}
+- **Project-specific profiles**: `profiles/_project/`
+- **Project-specific skills**: `skills/_project/`
+- **Project-specific rules**: `rules/_project/`
+
+### Commands
+
+| Command | Purpose |
+|---------|---------|
+| `/plan` | Create or update implementation plan |
+| `/work` | Execute tasks from the plan |
+| `/review` | Review code changes |
+| `/release` | Prepare release |

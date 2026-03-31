@@ -1,0 +1,51 @@
+# Plans -- {Project/Feature Name}
+
+## Goal
+
+{One-paragraph description of what we are building and why. Include the problem being solved, the target users, and the expected outcome.}
+
+## Scope
+
+### In Scope
+- {Feature or deliverable 1}
+- {Feature or deliverable 2}
+
+### Out of Scope
+- {Explicitly excluded item 1}
+- {Explicitly excluded item 2}
+
+## Tasks
+
+| ID | Description | Definition of Done | Dependencies | Profile | Status |
+|----|-------------|-------------------|--------------|---------|--------|
+| T1 | {Task description} | {Measurable completion criteria} | - | backend | TODO |
+| T2 | {Task description} | {Measurable completion criteria} | T1 | frontend | TODO |
+| T3 | {Task description} | {Measurable completion criteria} | - | backend | TODO |
+| T4 | {Task description} | {Measurable completion criteria} | T2, T3 | frontend | TODO |
+| T5 | {Task description} | {Measurable completion criteria} | T4 | testing | TODO |
+
+### Status Legend
+
+| Status | Meaning |
+|--------|---------|
+| TODO | Not started |
+| IN_PROGRESS | Currently being worked on |
+| REVIEW | Completed, awaiting review |
+| DONE | Reviewed and accepted |
+| BLOCKED | Cannot proceed (see Notes) |
+
+## Architecture Decisions
+
+| Decision | Rationale | Alternatives Considered |
+|----------|-----------|------------------------|
+| {Decision 1} | {Why this choice} | {What else was considered} |
+
+## Notes
+
+{Any context, constraints, open questions, or decisions made during planning. Reference task IDs where relevant.}
+
+## Risks
+
+| Risk | Impact | Mitigation |
+|------|--------|------------|
+| {Risk description} | High/Medium/Low | {How to mitigate} |
