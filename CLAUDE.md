@@ -16,6 +16,7 @@ CCClaude uses a four-role system with ten composable profiles:
 | **Worker** | Executes tasks from Plans.md using the assigned profile |
 | **Reviewer** | Reviews code changes against rules and checklists |
 | **Orchestrator** | Coordinates multi-agent workflows across roles |
+| **Harden** | Audits and hardens role/profile definitions — injects bans, 防呆 over cleverness |
 
 ### Profiles (10)
 
@@ -45,6 +46,21 @@ Worker + backend profile + common rules + git-workflow skill
 
 Rules are always loaded (they are guardrails). Skills are loaded contextually based on the conversation.
 
+### Iron Rule System
+
+Every role in CCClaude follows a structured iron rule system. This is the core innovation that prevents AI agents from making stupid mistakes.
+
+**Key principles:**
+- Every role has explicit **tool bans** with reasons
+- Every role has numbered **iron rules** (铁律) with NEVER/DO NOT/CRITICAL statements
+- Every ban has a **reason** explaining the specific consequence of violation
+- The **Harden role** audits all other roles against these standards (dual enforcement)
+
+**Three universal rules apply to all roles** (defined in `rules/common/`):
+- `iron-rule-standard.md` — ban format and structure requirements
+- `honesty.md` — no guessing, no fabrication, explicit uncertainty tagging
+- `anti-overreach.md` — stay in scope, no gold-plating
+
 ## Commands
 
 | Command | Description |
@@ -54,6 +70,7 @@ Rules are always loaded (they are guardrails). Skills are loaded contextually ba
 | `/review` | Start the Reviewer role to audit code changes |
 | `/release` | Prepare a release (changelog, version bump, tags) |
 | `/orchestrate` | Start multi-agent coordination |
+| `/harden` | Audit and harden role/profile/rule definitions |
 
 ## Directory Structure
 

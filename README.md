@@ -6,7 +6,7 @@ CCClaude provides a structured framework for using Claude Code across software p
 
 ## Features
 
-- **4 Roles**: Planner, Worker, Reviewer, Releaser
+- **5 Roles**: Planner, Worker, Reviewer, Releaser, Harden
 - **10 Profiles**: Architect, Backend, Frontend, Database, DevOps, Security, Performance, Testing, Reviewer, Documentation
 - **Guardrail Rules**: Coding style, git workflow, testing, security, and performance rules enforced on every interaction
 - **Contextual Skills**: Domain knowledge loaded automatically based on conversation context
@@ -36,6 +36,7 @@ git clone https://github.com/anthropics/CCClaude.git
 /plan Add user authentication with OAuth 2.0
 /work T1
 /review
+/harden all    # Audit all role definitions against iron rule standards
 ```
 
 ## Architecture
@@ -125,6 +126,22 @@ CCClaude/
 | `/review` | Reviewer | Review current code changes against all rules |
 | `/release [patch\|minor\|major]` | Releaser | Prepare release: changelog, version, tags |
 | `/orchestrate <pipeline>` | All | Run pipeline: feature, bugfix, refactor, or security |
+| `/harden [role\|all]` | Harden | Audit and harden role/profile/rule definitions |
+
+## Iron Rule System
+
+CCClaude's core innovation is a structured iron rule system that prevents AI agents from making common mistakes. Every role definition contains:
+
+- **Tool Bans** — explicitly allowed and banned tools with reasons for each
+- **Numbered Iron Rules** (铁律) — NEVER/DO NOT/CRITICAL statements, each with a reason explaining the consequence of violation
+- **Ban Format Standard** — no soft language, no escape hatches, every ban must be verifiable and specific
+
+Three universal rules in `rules/common/` apply to all roles:
+- `iron-rule-standard.md` — ban format and structure requirements
+- `honesty.md` — no guessing, no fabrication, explicit uncertainty tagging
+- `anti-overreach.md` — stay in scope, no gold-plating
+
+The **Harden role** (`/harden`) audits all other role and profile definitions against these standards, providing dual enforcement.
 
 ## Customization
 

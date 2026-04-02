@@ -63,3 +63,4 @@ This project uses [CCClaude](https://github.com/anthropics/CCClaude) harness.
 | `/work` | Execute tasks from the plan |
 | `/review` | Review code changes |
 | `/release` | Prepare release |
+| `/harden` | Audit and harden role/profile/rule definitions |
