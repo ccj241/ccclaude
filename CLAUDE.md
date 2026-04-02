@@ -16,7 +16,7 @@ CCClaude uses a four-role system with ten composable profiles:
 | **Worker** | Executes tasks from Plans.md using the assigned profile |
 | **Reviewer** | Reviews code changes against rules and checklists |
 | **Orchestrator** | Coordinates multi-agent workflows across roles |
-| **Harden** | Audits and hardens role/profile definitions — injects bans, 防呆 over cleverness |
+| **Harden** | Audits and hardens role/profile definitions — injects bans, mistake-proofing over cleverness |
 
 ### Profiles (10)
 
@@ -52,7 +52,7 @@ Every role in CCClaude follows a structured iron rule system. This is the core i
 
 **Key principles:**
 - Every role has explicit **tool bans** with reasons
-- Every role has numbered **iron rules** (铁律) with NEVER/DO NOT/CRITICAL statements
+- Every role has numbered **iron rules** with NEVER/DO NOT/CRITICAL statements
 - Every ban has a **reason** explaining the specific consequence of violation
 - The **Harden role** audits all other roles against these standards (dual enforcement)
 

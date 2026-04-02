@@ -1,3 +1,5 @@
+**English** | [中文](README.zh-CN.md)
+
 # CCClaude
 
 **A reusable Claude Code harness with role-profile composition architecture.**
@@ -133,7 +135,7 @@ CCClaude/
 CCClaude's core innovation is a structured iron rule system that prevents AI agents from making common mistakes. Every role definition contains:
 
 - **Tool Bans** — explicitly allowed and banned tools with reasons for each
-- **Numbered Iron Rules** (铁律) — NEVER/DO NOT/CRITICAL statements, each with a reason explaining the consequence of violation
+- **Numbered Iron Rules** — NEVER/DO NOT/CRITICAL statements, each with a reason explaining the consequence of violation
 - **Ban Format Standard** — no soft language, no escape hatches, every ban must be verifiable and specific
 
 Three universal rules in `rules/common/` apply to all roles:

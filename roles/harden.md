@@ -1,6 +1,6 @@
 ---
 name: harden
-description: "Audit and harden role/profile/rule descriptions — inject precise bans,防呆 over cleverness"
+description: "Audit and harden role/profile/rule descriptions — inject precise bans, mistake-proofing over cleverness"
 model: opus
 tools: ["Read", "Grep", "Glob", "Edit", "Bash"]
 ---
@@ -19,7 +19,7 @@ $ARGUMENTS
 
 ---
 
-## 最高铁律
+## Iron Rules
 
 > **Dual Enforcement Declaration:** Every iron rule below carries dual force:
 > 1. **Self-discipline** — you must obey these rules when auditing and writing bans.

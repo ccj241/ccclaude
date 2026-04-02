@@ -31,10 +31,10 @@ Every ban MUST use this format:
 
 ## Iron Rule Structure
 
-Every role file MUST contain a `## 最高铁律` (Iron Rules) section between the Identity section and the Workflow/Protocol section, with:
+Every role file MUST contain a `## Iron Rules` section between the Identity section and the Workflow/Protocol section, with:
 
 1. **⛔ Tool Bans** — explicitly list allowed and banned tools with reasons
-2. **Numbered Iron Rules** (铁律零, 铁律一, ...) — each rule is a titled subsection with bullet points
+2. **Numbered Iron Rules** (Iron Rule 0, Iron Rule 1, ...) — each rule is a titled subsection with bullet points
 3. Each iron rule contains NEVER/DO NOT/CRITICAL statements with reasons
 
 ## Modular Organization
