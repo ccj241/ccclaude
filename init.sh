@@ -24,7 +24,7 @@ if [ ! -f "$HARNESS_DIR/CLAUDE.md" ]; then
 fi
 
 # Step 1: Create .claude directory structure
-echo "[1/5] Creating directory structure..."
+echo "[1/6] Creating directory structure..."
 mkdir -p "$PROJECT_DIR/.claude/commands"
 mkdir -p "$PROJECT_DIR/rules/common"
 mkdir -p "$PROJECT_DIR/rules/_project"
@@ -34,7 +34,7 @@ mkdir -p "$PROJECT_DIR/profiles/common"
 mkdir -p "$PROJECT_DIR/profiles/_project"
 
 # Step 2: Symlink shared rules
-echo "[2/5] Linking shared rules..."
+echo "[2/6] Linking shared rules..."
 for rule_file in "$HARNESS_DIR/rules/common/"*.md; do
     if [ -f "$rule_file" ]; then
         basename="$(basename "$rule_file")"
@@ -49,7 +49,7 @@ for rule_file in "$HARNESS_DIR/rules/common/"*.md; do
 done
 
 # Step 3: Symlink shared skills
-echo "[3/5] Linking shared skills..."
+echo "[3/6] Linking shared skills..."
 for skill_dir in "$HARNESS_DIR/skills/common/"*/; do
     if [ -d "$skill_dir" ]; then
         dirname="$(basename "$skill_dir")"
@@ -63,8 +63,23 @@ for skill_dir in "$HARNESS_DIR/skills/common/"*/; do
     fi
 done
 
-# Step 4: Symlink shared profiles
-echo "[4/5] Linking shared profiles..."
+# Step 4: Symlink commands
+echo "[4/6] Linking commands..."
+for cmd_file in "$HARNESS_DIR/commands/"*.md; do
+    if [ -f "$cmd_file" ]; then
+        basename="$(basename "$cmd_file")"
+        target="$PROJECT_DIR/.claude/commands/$basename"
+        if [ ! -e "$target" ]; then
+            ln -sf "$cmd_file" "$target"
+            echo "  Linked: .claude/commands/$basename"
+        else
+            echo "  Exists: .claude/commands/$basename (skipped)"
+        fi
+    fi
+done
+
+# Step 5: Symlink shared profiles
+echo "[5/6] Linking shared profiles..."
 for profile_file in "$HARNESS_DIR/profiles/common/"*; do
     if [ -f "$profile_file" ]; then
         basename="$(basename "$profile_file")"
@@ -78,8 +93,8 @@ for profile_file in "$HARNESS_DIR/profiles/common/"*; do
     fi
 done
 
-# Step 5: Generate CLAUDE.md from template if it does not exist
-echo "[5/5] Setting up CLAUDE.md..."
+# Step 6: Generate CLAUDE.md from template if it does not exist
+echo "[6/6] Setting up CLAUDE.md..."
 if [ ! -f "$PROJECT_DIR/CLAUDE.md" ]; then
     PROJECT_NAME="$(basename "$PROJECT_DIR")"
     sed "s/{Project Name}/$PROJECT_NAME/g" "$HARNESS_DIR/templates/CLAUDE.md.template" \

@@ -26,7 +26,7 @@ if (-not (Test-Path "$HarnessDir\CLAUDE.md")) {
 }
 
 # Step 1: Create directory structure
-Write-Host "[1/5] Creating directory structure..." -ForegroundColor Yellow
+Write-Host "[1/6] Creating directory structure..." -ForegroundColor Yellow
 $dirs = @(
     ".claude\commands",
     "rules\common",
@@ -44,7 +44,7 @@ foreach ($dir in $dirs) {
 }
 
 # Step 2: Copy shared rules
-Write-Host "[2/5] Copying shared rules..." -ForegroundColor Yellow
+Write-Host "[2/6] Copying shared rules..." -ForegroundColor Yellow
 $ruleFiles = Get-ChildItem -Path "$HarnessDir\rules\common" -Filter "*.md" -ErrorAction SilentlyContinue
 foreach ($file in $ruleFiles) {
     $target = Join-Path $ProjectDir "rules\common\$($file.Name)"
@@ -57,7 +57,7 @@ foreach ($file in $ruleFiles) {
 }
 
 # Step 3: Copy shared skills
-Write-Host "[3/5] Copying shared skills..." -ForegroundColor Yellow
+Write-Host "[3/6] Copying shared skills..." -ForegroundColor Yellow
 $skillDirs = Get-ChildItem -Path "$HarnessDir\skills\common" -Directory -ErrorAction SilentlyContinue
 foreach ($dir in $skillDirs) {
     $target = Join-Path $ProjectDir "skills\common\$($dir.Name)"
@@ -69,8 +69,21 @@ foreach ($dir in $skillDirs) {
     }
 }
 
-# Step 4: Copy shared profiles
-Write-Host "[4/5] Copying shared profiles..." -ForegroundColor Yellow
+# Step 4: Copy commands
+Write-Host "[4/6] Copying commands..." -ForegroundColor Yellow
+$cmdFiles = Get-ChildItem -Path "$HarnessDir\commands" -Filter "*.md" -ErrorAction SilentlyContinue
+foreach ($file in $cmdFiles) {
+    $target = Join-Path $ProjectDir ".claude\commands\$($file.Name)"
+    if (-not (Test-Path $target)) {
+        Copy-Item $file.FullName $target
+        Write-Host "  Copied: .claude/commands/$($file.Name)"
+    } else {
+        Write-Host "  Exists: .claude/commands/$($file.Name) (skipped)"
+    }
+}
+
+# Step 5: Copy shared profiles
+Write-Host "[5/6] Copying shared profiles..." -ForegroundColor Yellow
 $profileFiles = Get-ChildItem -Path "$HarnessDir\profiles\common" -File -ErrorAction SilentlyContinue
 foreach ($file in $profileFiles) {
     $target = Join-Path $ProjectDir "profiles\common\$($file.Name)"
@@ -82,8 +95,8 @@ foreach ($file in $profileFiles) {
     }
 }
 
-# Step 5: Generate CLAUDE.md from template if it does not exist
-Write-Host "[5/5] Setting up CLAUDE.md..." -ForegroundColor Yellow
+# Step 6: Generate CLAUDE.md from template if it does not exist
+Write-Host "[6/6] Setting up CLAUDE.md..." -ForegroundColor Yellow
 $claudeMd = Join-Path $ProjectDir "CLAUDE.md"
 if (-not (Test-Path $claudeMd)) {
     $projectName = Split-Path $ProjectDir -Leaf
